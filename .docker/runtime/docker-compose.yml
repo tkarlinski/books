@@ -1,0 +1,48 @@
+version: '3'
+
+networks:
+    default:
+        driver: bridge
+    services:
+        external:
+            name: MyServices
+
+services:
+    application:
+        container_name: ${CONTAINER_NAME}
+        build:
+            context: ${HOST_APP_DIR}
+            dockerfile: .docker/Dockerfile
+            args:
+                xdebug_port: ${XDEBUG_PORT}
+        ports:
+            - 80:80
+        volumes:
+            - ${HOST_APP_DIR}:/var/www/html/application
+        environment:
+            APP_ENV: dev
+            APP_DOMAIN: ${APP_DOMAIN}
+            RUN_COMPOSER: ${RUN_COMPOSER}
+            DB_USER: ${DB_USER}
+            DB_PASSWORD: ${DB_PASSWORD}
+            DB_NAME: ${DB_NAME}
+            DB_HOST: ${DB_HOST}
+        depends_on:
+            - mariadb
+        networks:
+            - services
+        restart: always
+
+    mariadb:
+        image: mariadb:10.4
+        container_name: ${DB_HOST}
+        volumes:
+            - /var/docker/volumes/books_mysql:/var/lib/mysq
+        environment:
+            - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+            - MYSQL_DATABASE=${DB_NAME}
+            - MYSQL_USER=${DB_USER}
+            - MYSQL_PASSWORD=${DB_PASSWORD}
+        networks:
+            - services
+        restart: always
