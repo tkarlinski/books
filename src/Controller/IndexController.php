@@ -12,13 +12,10 @@ class IndexController extends AbstractController
      * @Template()
      * @Route("/index", name="index")
      */
-    public function index() : array
+    public function index(): array
     {
-        return [];
-
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/IndexController.php',
-        ]);
+        return [
+            'message' => 'Twig test page',
+        ];
     }
 }
