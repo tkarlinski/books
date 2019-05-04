@@ -23,10 +23,12 @@ services:
             APP_ENV: dev
             APP_DOMAIN: ${APP_DOMAIN}
             RUN_COMPOSER: ${RUN_COMPOSER}
+            DB_SERVER_VERSION: ${DB_SERVER_VERSION}
             DB_USER: ${DB_USER}
             DB_PASSWORD: ${DB_PASSWORD}
             DB_NAME: ${DB_NAME}
             DB_HOST: ${DB_HOST}
+            DB_PORT: ${DB_PORT}
         depends_on:
             - mariadb
         networks:
@@ -34,7 +36,7 @@ services:
         restart: always
 
     mariadb:
-        image: mariadb:10.4
+        image: mariadb:10.1
         container_name: ${DB_HOST}
         volumes:
             - /var/docker/volumes/books_mysql:/var/lib/mysq
