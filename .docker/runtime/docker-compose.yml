@@ -39,7 +39,7 @@ services:
         image: mariadb:10.1
         container_name: ${DB_HOST}
         volumes:
-            - /var/docker/volumes/books_mysql:/var/lib/mysq
+            - /var/docker/volumes/books_mysql:/var/lib/mysql
         environment:
             - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
             - MYSQL_DATABASE=${DB_NAME}
