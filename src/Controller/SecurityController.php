@@ -13,8 +13,6 @@ class SecurityController extends AbstractController
      * @Template()
      *
      * @Route("/login", name="app_login")
-     * @param AuthenticationUtils $authenticationUtils
-     * @return array
      */
     public function login(AuthenticationUtils $authenticationUtils): array
     {
@@ -28,5 +26,13 @@ class SecurityController extends AbstractController
             'last_username' => $lastUsername,
             'error' => $error
         ];
+    }
+
+    /**
+     * @Route("/logout", name="app_logout")
+     */
+    public function logout()
+    {
+        throw new \Exception('Will be intercepted before getting here');
     }
 }
