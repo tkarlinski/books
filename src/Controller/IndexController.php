@@ -18,4 +18,19 @@ class IndexController extends AbstractController
             'message' => 'Twig test page',
         ];
     }
+
+    /**
+     * @Template()
+     * @Route("/", name="app_homepage")
+     */
+    public function homepage()
+    {
+
+        var_dump('homepage');
+//        die(__METHOD__);
+
+        return [
+            'message' => 'Homepage',
+        ];
+    }
 }
