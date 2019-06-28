@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,17 +19,17 @@ class Book
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=200)
+     * @ORM\Column(name="tytul", type="string", length=200)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(name="rok", type="smallint", nullable=true)
      */
     private $publishYear;
 
     /**
-     * @ORM\Column(type="smallint")
+     * @ORM\Column(name="strony", type="smallint")
      */
     private $pages;
 
@@ -35,6 +37,34 @@ class Book
      * @ORM\Column(type="string", length=25)
      */
     private $isbn;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\City")
+     * @ORM\JoinColumn(name="id_miasto", referencedColumnName="id")
+     */
+    private $city;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\PublishingHouse", inversedBy="books")
+     * @ORM\JoinColumn(name="id_wydawnictwo", referencedColumnName="id")
+     */
+    private $publishingHouse;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="book", orphanRemoval=true)
+     */
+    private $note;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="books")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    public function __construct()
+    {
+        $this->note = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -85,6 +115,73 @@ class Book
     public function setIsbn(string $isbn): self
     {
         $this->isbn = $isbn;
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getPublishingHouse(): ?PublishingHouse
+    {
+        return $this->publishingHouse;
+    }
+
+    public function setPublishingHouse(?PublishingHouse $publishingHouse): self
+    {
+        $this->publishingHouse = $publishingHouse;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Note[]
+     */
+    public function getNote(): Collection
+    {
+        return $this->note;
+    }
+
+    public function addNote(Note $note): self
+    {
+        if (!$this->note->contains($note)) {
+            $this->note[] = $note;
+            $note->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNote(Note $note): self
+    {
+        if ($this->note->contains($note)) {
+            $this->note->removeElement($note);
+            // set the owning side to null (unless already changed)
+            if ($note->getBook() === $this) {
+                $note->setBook(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

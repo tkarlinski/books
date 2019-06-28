@@ -32,6 +32,12 @@ class Note
      */
     private $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Book", inversedBy="note")
+     * @ORM\JoinColumn(name="id_ksiazka", referencedColumnName="id")
+     */
+    private $book;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class Note
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    public function setBook(?Book $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }
