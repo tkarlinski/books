@@ -19,7 +19,7 @@ class Note
     private $id;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(name="tresc", type="text")
      */
     private $content;
 

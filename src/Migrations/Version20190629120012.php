@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190629113403 extends AbstractMigration
+final class Version20190629120012 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -25,7 +25,7 @@ final class Version20190629113403 extends AbstractMigration
         $this->addSql('CREATE TABLE miasto (id INT AUTO_INCREMENT NOT NULL, nazwa VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE wydawnictwo (id INT AUTO_INCREMENT NOT NULL, nazwa VARCHAR(100) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE przeczytane (id INT AUTO_INCREMENT NOT NULL, data_rozpoczecia DATETIME DEFAULT NULL, data_zakonczenia DATETIME DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE notatka (id INT AUTO_INCREMENT NOT NULL, id_ksiazka INT DEFAULT NULL, content LONGTEXT NOT NULL, data_utworzenia DATETIME NOT NULL, data_edycji DATETIME NOT NULL, INDEX IDX_DFCBA00EB5949A00 (id_ksiazka), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE notatka (id INT AUTO_INCREMENT NOT NULL, id_ksiazka INT DEFAULT NULL, tresc LONGTEXT NOT NULL, data_utworzenia DATETIME NOT NULL, data_edycji DATETIME NOT NULL, INDEX IDX_DFCBA00EB5949A00 (id_ksiazka), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE ksiazka (id INT AUTO_INCREMENT NOT NULL, id_miasto INT DEFAULT NULL, id_wydawnictwo INT DEFAULT NULL, user_id INT NOT NULL, tytul VARCHAR(200) NOT NULL, rok SMALLINT DEFAULT NULL, strony SMALLINT NOT NULL, isbn VARCHAR(25) NOT NULL, INDEX IDX_6B093370F4CE9BA2 (id_miasto), INDEX IDX_6B093370FB157B9E (id_wydawnictwo), INDEX IDX_6B093370A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('CREATE TABLE autor_ksiazka (id_autor INT NOT NULL, id_ksiazka INT NOT NULL, INDEX IDX_AAD92B06DF821F8A (id_autor), INDEX IDX_AAD92B06B5949A00 (id_ksiazka), PRIMARY KEY(id_autor, id_ksiazka)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE notatka ADD CONSTRAINT FK_DFCBA00EB5949A00 FOREIGN KEY (id_ksiazka) REFERENCES ksiazka (id)');
