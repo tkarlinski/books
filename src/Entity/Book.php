@@ -61,9 +61,19 @@ class Book
      */
     private $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Author", inversedBy="books")
+     * @ORM\JoinTable(name="autor_ksiazka",
+     *      joinColumns={@ORM\JoinColumn(name="id_autor", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_ksiazka", referencedColumnName="id")}
+     *      )
+     */
+    private $authors;
+
     public function __construct()
     {
         $this->note = new ArrayCollection();
+        $this->authors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,6 +192,32 @@ class Book
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Author[]
+     */
+    public function getAuthors(): Collection
+    {
+        return $this->authors;
+    }
+
+    public function addAuthor(Author $author): self
+    {
+        if (!$this->authors->contains($author)) {
+            $this->authors[] = $author;
+        }
+
+        return $this;
+    }
+
+    public function removeAuthor(Author $author): self
+    {
+        if ($this->authors->contains($author)) {
+            $this->authors->removeElement($author);
+        }
 
         return $this;
     }
