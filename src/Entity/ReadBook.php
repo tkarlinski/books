@@ -25,7 +25,7 @@ class ReadBook
     /**
      * @ORM\Column(name="data_zakonczenia", type="datetime", nullable=true)
      */
-    private $end_date;
+    private $endDate;
 
     public function getId(): ?int
     {
@@ -46,12 +46,12 @@ class ReadBook
 
     public function getEndDate(): ?\DateTimeInterface
     {
-        return $this->end_date;
+        return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $end_date): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
-        $this->end_date = $end_date;
+        $this->endDate = $endDate;
 
         return $this;
     }
