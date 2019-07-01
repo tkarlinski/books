@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PublishingHouse{% endblock %}
+
+{% block body %}
+    <h1>PublishingHouse</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Name</th>
+                <td>{{ publishing_house.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_publishinghouse_index') }}">back to list</a>
+
+    <a href="{{ path('app_publishinghouse_edit', {'id': publishing_house.id}) }}">edit</a>
+
+    {{ include('publishing_house/_delete_form.html.twig') }}
+{% endblock %}
