@@ -8,7 +8,6 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Name</th>
                 <th>actions</th>
             </tr>
@@ -16,7 +15,6 @@
         <tbody>
         {% for city in cities %}
             <tr>
-                <td>{{ city.id }}</td>
                 <td>{{ city.name }}</td>
                 <td>
                     <a href="{{ path('app_city_show', {'id': city.id}) }}">show</a>
