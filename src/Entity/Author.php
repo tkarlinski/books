@@ -34,6 +34,11 @@ class Author
      */
     private $books;
 
+    public function __toString(): string
+    {
+        return $this->name . ' ' . $this->surname;
+    }
+
     public function __construct()
     {
         $this->books = new ArrayCollection();

@@ -29,6 +29,11 @@ class PublishingHouse
      */
     private $books;
 
+    public function __toString(): string
+    {
+        return $this->name;
+    }
+
     public function __construct()
     {
         $this->books = new ArrayCollection();
