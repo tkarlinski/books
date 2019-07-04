@@ -7,6 +7,8 @@ if [ "true" == "${RUN_COMPOSER}" ]; then
     composer update --no-interaction --prefer-dist --optimize-autoloader --profile --no-progress
 fi
 
+yarn install --dev
+
 php bin/console cache:clear --env=${APP_ENV}
 php bin/console doctrine:cache:clear-metadata --env=${APP_ENV}
 php bin/console cache:warmup --env=${APP_ENV}
