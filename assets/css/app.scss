@@ -1,7 +1,27 @@
+@import "./layout/variables";
+
+$body-bg: $backgroundColor;
+$body-color: $fontStandardColor;
+
+$theme-colors: (
+        //"primary": $thirdSpecialColor,
+        //"secondary": $thirdSpecialColor,
+        //"success": #11FF22,
+        //"info": #11FF22,
+        //"warning": #11FF22,
+        //"danger": #11FF22,
+        //"light": #11FF22,
+        "dark": $backgroundColor
+);
+
+$navbar-light-color: $yellowColor;
+$navbar-light-hover-color: $fontStandardColor;
+$navbar-light-active-color: $redColor;
+
+.bg-dark {
+  border-bottom: 1px solid $yellowColor;
+}
+
 @import "~bootstrap";
 @import "~font-awesome";
-
-body {
-    background-color: #feffff !important;
-}
 
