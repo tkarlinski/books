@@ -1,0 +1,23 @@
+{% from '_layout/macro.html.twig' import menu_active_class %}
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item {{ menu_active_class('app_book_index') }}">
+                <a class="nav-link" href="{{ path('app_book_index') }}" title="Lista książek">Książki</a>
+            </li>
+            <li class="nav-item {{ menu_active_class('app_author_index') }}">
+                <a class="nav-link" href="{{ path('app_author_index') }}" title="Lista autorów">Autorzy</a>
+            </li>
+            <li class="nav-item {{ menu_active_class('app_publishinghouse_index') }}">
+                <a class="nav-link" href="{{ path('app_publishinghouse_index') }}" title="Lista wydawnictw">Wydawnictwa</a>
+            </li>
+            <li class="nav-item {{ menu_active_class('app_city_index') }}">
+                <a class="nav-link" href="{{ path('app_city_index') }}" title="Lista miejsc wydania">Miejsca wydania</a>
+            </li>
+        </ul>
+    </div>
+</nav>
