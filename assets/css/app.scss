@@ -18,10 +18,26 @@ $navbar-light-color: $yellowColor;
 $navbar-light-hover-color: $fontStandardColor;
 $navbar-light-active-color: $redColor;
 
-.bg-dark {
-  border-bottom: 1px solid $yellowColor;
-}
+$dropdown-link-color: $yellowColor;
+$dropdown-bg: $lightBackgroundColor;
 
 @import "~bootstrap";
 @import "~font-awesome";
 
+.bg-dark {
+  border-bottom: 1px solid $yellowColor;
+}
+
+.dropdown-item {
+  @include hover-focus {
+    color: $yellowColor;
+    background: $fontStandardColor;
+  }
+}
+//.dropdown-menu {
+//  background-color: $lightBackgroundColor;
+//}
+//
+//.dropdown-item {
+//  color: $yellowColor;
+//}
