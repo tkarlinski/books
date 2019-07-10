@@ -10,13 +10,15 @@
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        {{ include('_layout/menu.html.twig') }}
-
-        {% block body %}{% endblock %}
-
+    {{ include('_layout/menu.html.twig') }}
+    <div class="row">
+        <div class="col-md" id="content-page">
+            {% block body %}{% endblock %}
+        </div>
     </div>
+</div>
 
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}

@@ -2,6 +2,7 @@
 
 $body-bg: $backgroundColor;
 $body-color: $fontStandardColor;
+$font-size-base: 1rem !default;
 
 $theme-colors: (
         //"primary": $thirdSpecialColor,
@@ -12,7 +13,17 @@ $theme-colors: (
         //"danger": #11FF22,
         //"light": #11FF22,
         "dark": $backgroundColor
+        //"dark": #000000
 );
+
+$border-radius: .5rem !default;
+
+$h1-font-size: $font-size-base * 2 !default;
+$h2-font-size: $font-size-base * 1.75 !default;
+$h3-font-size: $font-size-base * 1.5 !default;
+$h4-font-size: $font-size-base * 1.25 !default;
+$h5-font-size: $font-size-base !default;
+$h6-font-size: $font-size-base !default;
 
 $navbar-light-color: $yellowColor;
 $navbar-light-hover-color: $fontStandardColor;
@@ -21,11 +32,23 @@ $navbar-light-active-color: $redColor;
 $dropdown-link-color: $yellowColor;
 $dropdown-bg: $lightBackgroundColor;
 
+$table-bg: $backgroundColor;
+$table-border-color: $fontStandardColor;
+$table-head-color: $greenColor;
+
 @import "~bootstrap";
 @import "~font-awesome";
 
-.bg-dark {
-  border-bottom: 1px solid $yellowColor;
+div.container {
+  background: $black;
+}
+
+#content-page {
+  margin-bottom: 3rem;
+}
+
+.navbar {
+  margin-bottom: 1rem;
 }
 
 .dropdown-item {
@@ -34,10 +57,28 @@ $dropdown-bg: $lightBackgroundColor;
     background: $fontStandardColor;
   }
 }
-//.dropdown-menu {
-//  background-color: $lightBackgroundColor;
-//}
-//
-//.dropdown-item {
-//  color: $yellowColor;
-//}
+
+h1 {
+  color: $redColor;
+}
+
+th {
+  color: $greenColor;
+}
+
+.btn-outline-primary {
+  border-color: $yellowColor;
+  color: $yellowColor;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary:focus {
+  background: $yellowColor;
+  border-color: $yellowColor;
+  color: $backgroundColor;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active {
+  background: $yellowColor;
+  border-color: $yellowColor;
+  color: $backgroundColor;
+}
