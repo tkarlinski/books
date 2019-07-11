@@ -1,19 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book index{% endblock %}
+{% block title %}Książki{% endblock %}
 
 {% block body %}
-    <h1>Book index</h1>
 
-    <table class="table">
+    {% include '_layout/list_header.html.twig' with {'header': 'Książki', 'path_add': 'app_book_new'} %}
+
+    <table class="table rounded table-bordered">
         <thead>
-            <tr>
-                <th>Title</th>
-                <th>PublishYear</th>
-                <th>Pages</th>
-                <th>Isbn</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th scope="col">Tytuł</th>
+            <th scope="col">Rok wydania</th>
+            <th scope="col">Stron</th>
+            <th scope="col">ISBN</th>
+            <th scope="col" class="w-25">Akcje</th>
+        </tr>
         </thead>
         <tbody>
         {% for book in books %}
@@ -22,18 +23,21 @@
                 <td>{{ book.publishYear }}</td>
                 <td>{{ book.pages }}</td>
                 <td>{{ book.isbn }}</td>
-                <td>
-                    <a href="{{ path('app_book_show', {'id': book.id}) }}">show</a>
-                    <a href="{{ path('app_book_edit', {'id': book.id}) }}">edit</a>
+                <td class="w-25">
+                    <a class="btn btn-outline-primary btn-sm"
+                       href="{{ path('app_book_show', {'id': book.id}) }}">szczegóły</a>
+                    <a class="btn btn-outline-primary btn-sm"
+                       href="{{ path('app_book_edit', {'id': book.id}) }}">edytuj</a>
+                    <a class="btn btn-outline-primary btn-sm"
+                       href="{{ path('app_book_delete', {'id': book.id}) }}">usuń</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="3">brak danych</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_book_new') }}">Create new</a>
 {% endblock %}

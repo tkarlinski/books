@@ -1,33 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}PublishingHouse index{% endblock %}
+{% block title %}Wydawnictwa{% endblock %}
 
 {% block body %}
-    <h1>PublishingHouse index</h1>
 
-    <table class="table">
+    {% include '_layout/list_header.html.twig' with {'header': 'Wydawnictwa', 'path_add': 'app_publishinghouse_new'} %}
+
+    <table class="table rounded table-bordered">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th scope="col">Nazwa</th>
+            <th scope="col" class="w-25">Akcje</th>
+        </tr>
         </thead>
         <tbody>
         {% for publishing_house in publishing_houses %}
             <tr>
                 <td>{{ publishing_house.name }}</td>
-                <td>
-                    <a href="{{ path('app_publishinghouse_show', {'id': publishing_house.id}) }}">show</a>
-                    <a href="{{ path('app_publishinghouse_edit', {'id': publishing_house.id}) }}">edit</a>
+                <td class="w-25">
+                    <a class="btn btn-outline-primary btn-sm"
+                       href="{{ path('app_publishinghouse_edit', {'id': publishing_house.id}) }}">edytuj</a>
+                    <a class="btn btn-outline-primary btn-sm"
+                       href="{{ path('app_publishinghouse_delete', {'id': publishing_house.id}) }}">usuń</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">brak danych</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_publishinghouse_new') }}">Create new</a>
 {% endblock %}

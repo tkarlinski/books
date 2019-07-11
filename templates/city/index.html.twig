@@ -4,24 +4,20 @@
 
 {% block body %}
 
-
-    {% include '_layout/list_header.html.twig' with {'header': 'Miejsce wydania', 'path_add': 'app_city_new'} %}
-
+    {% include '_layout/list_header.html.twig' with {'header': 'Miejsca wydania', 'path_add': 'app_city_new'} %}
 
     <table class="table rounded table-bordered">
         <thead>
         <tr>
             <th scope="col">Miasto</th>
-            <th scope="col">Akcje</th>
+            <th scope="col" class="w-25">Akcje</th>
         </tr>
         </thead>
         <tbody>
         {% for city in cities %}
             <tr>
                 <td>{{ city.name }}</td>
-                <td>
-                    <a class="btn btn-outline-primary btn-sm"
-                       href="{{ path('app_city_show', {'id': city.id}) }}">szczegóły</a>
+                <td class="w-25">
                     <a class="btn btn-outline-primary btn-sm"
                        href="{{ path('app_city_edit', {'id': city.id}) }}">edytuj</a>
                     <a class="btn btn-outline-primary btn-sm"

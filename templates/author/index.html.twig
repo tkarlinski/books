@@ -1,35 +1,38 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Author index{% endblock %}
+{% block title %}Autorzy{% endblock %}
 
 {% block body %}
-    <h1>Author index</h1>
 
-    <table class="table">
+    {% include '_layout/list_header.html.twig' with {'header': 'Miejsca wydania', 'path_add': 'app_author_new'} %}
+
+    <table class="table rounded table-bordered">
         <thead>
-            <tr>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th scope="col">Imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col" class="w-25">Akcje</th>
+        </tr>
         </thead>
         <tbody>
-        {% for author in authors %}
+        {% for author in authors%}
             <tr>
                 <td>{{ author.name }}</td>
                 <td>{{ author.surname }}</td>
-                <td>
-                    <a href="{{ path('app_author_show', {'id': author.id}) }}">show</a>
-                    <a href="{{ path('app_author_edit', {'id': author.id}) }}">edit</a>
+                <td class="w-25">
+                    <a class="btn btn-outline-primary btn-sm"
+                       href="{{ path('app_author_edit', {'id': author.id}) }}">edytuj</a>
+                    <a class="btn btn-outline-primary btn-sm"
+                       href="{{ path('app_author_delete', {'id': author.id}) }}">usuń</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="3">brak danych</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_author_new') }}">Create new</a>
+
 {% endblock %}
