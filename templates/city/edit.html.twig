@@ -3,11 +3,11 @@
 {% block title %}Edit City{% endblock %}
 
 {% block body %}
-    <h1>Edit City</h1>
+    <h1>Edycja miasta</h1>
 
-    {{ include('city/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('city/_form.html.twig') }}
 
-    <a href="{{ path('app_city_index') }}">back to list</a>
+    <a class="back-link" href="{{ path('app_city_index') }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i>Powrót do listy</a>
 
-    {{ include('city/_delete_form.html.twig') }}
+{#    {{ include('city/_delete_form.html.twig') }}#}
 {% endblock %}
