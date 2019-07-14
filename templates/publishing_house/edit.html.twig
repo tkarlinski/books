@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit PublishingHouse{% endblock %}
+{% block title %}Edytuj wydawnictwa{% endblock %}
 
 {% block body %}
-    <h1>Edit PublishingHouse</h1>
+    <h1>Edytuj wydawnictwo</h1>
 
-    {{ include('publishing_house/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('publishing_house/_form.html.twig') }}
 
-    <a href="{{ path('app_publishinghouse_index') }}">back to list</a>
+    {{ include('_layout/back_clink.html.twig', {'path_list': 'app_publishinghouse_index'}) }}
 
-    {{ include('publishing_house/_delete_form.html.twig') }}
+{#    {{ include('publishing_house/_delete_form.html.twig') }}#}
 {% endblock %}

@@ -1,11 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New City{% endblock %}
+{% block title %}Dodaj miejsce wydania{% endblock %}
 
 {% block body %}
-    <h1>Create new City</h1>
+    <h1>Dodaj miejsce wydania</h1>
 
     {{ include('city/_form.html.twig') }}
 
-    <a href="{{ path('app_city_index') }}">back to list</a>
+    {{ include('_layout/back_clink.html.twig', {'path_list': 'app_city_index'}) }}
+
 {% endblock %}
