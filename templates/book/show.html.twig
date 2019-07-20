@@ -1,34 +1,89 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book{% endblock %}
+{% block title %}Szczegóły książki{% endblock %}
 
 {% block body %}
-    <h1>Book</h1>
+    <div class="row">
+        <div class="col-11">
+            <h1>{{ book.title }}</h1>
+        </div>
+        <div class="col-1">
+            <div class="btn-group pull-right" role="group">
+                <button type="button" class="btn btn-outline-primary btn-sm">edytuj</button>
+                <button type="button" class="btn btn-outline-primary btn-sm">usuń</button>
+            </div>
+
+        </div>
+    </div>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Title</th>
-                <td>{{ book.title }}</td>
+                <th>Autor</th>
+                <td>Jan Brzechwa, Cezary Cezary</td>
             </tr>
             <tr>
-                <th>PublishYear</th>
-                <td>{{ book.publishYear }}</td>
+                <th>Wydawnictwo</th>
+                <td>Gdańska Oficyna Wydawnicza</td>
             </tr>
             <tr>
-                <th>Pages</th>
-                <td>{{ book.pages }}</td>
+                <th>Wydano</th>
+                <td>Warszawa, {{ book.publishYear }} rok</td>
             </tr>
             <tr>
                 <th>Isbn</th>
                 <td>{{ book.isbn }}</td>
             </tr>
+            <tr>
+                <th>Ilość stron</th>
+                <td>{{ book.pages }}</td>
+            </tr>
+            <tr>
+                <th>Przeczytano</th>
+                <td>Tak (20.01.2019 - 31.01.2019)</td>
+            </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_book_index') }}">back to list</a>
+    <div class="row notes">
+        <div class="col-12">
+            <h2>Notatki</h2>
+        </div>
+        <div class="col-12">
+            <p>
+                Lorem ipsum. Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+            </p>
+            <span class=""><small>Utworzono: 02.01.2018 23:25 | Edytowano: 01.01.2018 20:25</small></span>
+            <div class="btn-group pull-right" role="group">
+                <button type="button" class="btn btn-outline-primary btn-sm">edytuj</button>
+                <button type="button" class="btn btn-outline-primary btn-sm">usuń</button>
+            </div>
+        </div>
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-12">
+            <p>
+                Lorem ipsum. Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+            </p>
+            <span class=""><small>Utworzono: 02.01.2018 23:25 | Edytowano: 01.01.2018 20:25</small></span>
 
-    <a href="{{ path('app_book_edit', {'id': book.id}) }}">edit</a>
+            <div class="btn-group pull-right" role="group">
+                <button type="button" class="btn btn-outline-primary btn-sm">edytuj</button>
+                <button type="button" class="btn btn-outline-primary btn-sm">usuń</button>
+            </div>
+        </div>
+    </div>
 
-    {{ include('book/_delete_form.html.twig') }}
+{#    {{ include('book/_delete_form.html.twig') }}#}
+
+    {{ include('_layout/back_link.html.twig', {'path_list': 'app_book_index'}) }}
 {% endblock %}
