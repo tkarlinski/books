@@ -1,4 +1,9 @@
 export default function(exclamationCount) {
-    return 'JS work'+'!'.repeat(exclamationCount);
+    $('body').ready(function () {
+        console.log('message');
+    });
 
+    return 'JS work'+'!'.repeat(exclamationCount);
 }
+
+

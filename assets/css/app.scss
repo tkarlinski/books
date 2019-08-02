@@ -13,7 +13,6 @@ $theme-colors: (
         //"danger": #11FF22,
         //"light": #11FF22,
         "dark": $backgroundColor
-        //"dark": #000000
 );
 
 $border-radius: .5rem !default;
@@ -36,7 +35,11 @@ $table-bg: $backgroundColor;
 $table-border-color: $fontStandardColor;
 $table-head-color: $greenColor;
 
+$input-color-placeholder: #443322 !default;
+$input-alt-color-placeholder: #443322 !default;
+
 @import "~bootstrap";
+@import "~bootstrap-select/sass/bootstrap-select";
 @import "~font-awesome";
 
 ::selection {
@@ -126,6 +129,32 @@ form {
     box-shadow: 0 0 0 0;
   }
 
+}
+.bootstrap-select, .bootstrap-select.show {
+  .dropdown-toggle, .dropdown-toggle:active, .dropdown-toggle:focus
+  {
+    background: $black !important;
+    color: $fontStandardColor !important;
+    border-color: $lightBackgroundColor !important;
+    box-shadow: 0 0 0 0 !important;
+  }
+
+  .dropdown-item {
+    color: $greenColor;
+
+    &.selected, &.active {
+      //color: $white;
+      background: $lightBackgroundColor;
+      border: 1px solid $greenColor;
+    }
+
+    &:hover {
+      background: $greenColor;
+      color: $black;
+      //background: $lightBackgroundColor;
+      //border: 1px solid $fontStandardColor;
+    }
+  }
 }
 
 hr {
