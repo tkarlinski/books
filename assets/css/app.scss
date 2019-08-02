@@ -143,7 +143,6 @@ form {
     color: $greenColor;
 
     &.selected, &.active {
-      //color: $white;
       background: $lightBackgroundColor;
       border: 1px solid $greenColor;
     }
@@ -151,8 +150,6 @@ form {
     &:hover {
       background: $greenColor;
       color: $black;
-      //background: $lightBackgroundColor;
-      //border: 1px solid $fontStandardColor;
     }
   }
 }
