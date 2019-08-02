@@ -5,7 +5,6 @@ namespace App\Form;
 use App\Entity\Book;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,23 +18,23 @@ class BookType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Tytuł',
             ])
+            ->add('authors', null, [
+                'label' => 'Autorzy',
+            ])
+            ->add('isbn', TextType::class, [
+                'label' => 'ISBN',
+            ])
+            ->add('publishingHouse', null, [
+                'label' => 'Wydawnictwo',
+            ])
+            ->add('city', null, [
+                'label' => 'Miasto',
+            ])
             ->add('publishYear', IntegerType::class, [
                 'label' => 'Rok wydania',
             ])
             ->add('pages', IntegerType::class, [
                 'label' => 'Stron',
-            ])
-            ->add('isbn', TextType::class, [
-                'label' => 'ISBN',
-            ])
-            ->add('city', null, [
-                'label' => 'Miasto',
-            ])
-            ->add('publishingHouse', null, [
-                'label' => 'Wydawnictwo',
-            ])
-            ->add('authors', null, [
-                'label' => 'Autorzy',
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Zapisz',
