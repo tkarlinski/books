@@ -27,6 +27,12 @@ class ReadBook
      */
     private $endDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Book", inversedBy="readBooks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $book;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +58,18 @@ class ReadBook
     public function setEndDate(?\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    public function setBook(?Book $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }

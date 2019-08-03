@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Form\DataTransformer\PersistentCollectionToReadBookTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -12,6 +13,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookType extends AbstractType
 {
+    /** @var PersistentCollectionToReadBookTransformer  */
+    private $readBookTransformer;
+
+    public function __construct(PersistentCollectionToReadBookTransformer $readBookTransformer)
+    {
+        $this->readBookTransformer = $readBookTransformer;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -36,6 +45,9 @@ class BookType extends AbstractType
             ->add('pages', IntegerType::class, [
                 'label' => 'Stron',
             ])
+            ->add('readBooks', ReadBookType::class, [
+                'label' => 'Przeczytana'
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Zapisz',
                 'attr' => [
@@ -43,6 +55,8 @@ class BookType extends AbstractType
                 ]
             ]);
         ;
+
+        $builder->get('readBooks')->addModelTransformer($this->readBookTransformer);
     }
 
     public function configureOptions(OptionsResolver $resolver)

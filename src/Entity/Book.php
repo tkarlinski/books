@@ -71,10 +71,21 @@ class Book
      */
     private $authors;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ReadBook", mappedBy="book", orphanRemoval=true)
+     */
+    private $readBooks;
+
     public function __construct()
     {
         $this->note = new ArrayCollection();
         $this->authors = new ArrayCollection();
+        $this->readBooks = new ArrayCollection();
+    }
+
+    public function __toString(): string
+    {
+        return $this->getTitle();
     }
 
     public function getId(): ?int
@@ -218,6 +229,37 @@ class Book
     {
         if ($this->authors->contains($author)) {
             $this->authors->removeElement($author);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ReadBook[]
+     */
+    public function getReadBooks(): Collection
+    {
+        return $this->readBooks;
+    }
+
+    public function addReadBook(ReadBook $readBook): self
+    {
+        if (!$this->readBooks->contains($readBook)) {
+            $this->readBooks[] = $readBook;
+            $readBook->setBook($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReadBook(ReadBook $readBook): self
+    {
+        if ($this->readBooks->contains($readBook)) {
+            $this->readBooks->removeElement($readBook);
+            // set the owning side to null (unless already changed)
+            if ($readBook->getBook() === $this) {
+                $readBook->setBook(null);
+            }
         }
 
         return $this;

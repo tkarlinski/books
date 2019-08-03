@@ -1,4 +1,4 @@
-CREATE TABLE `autor`
+yaCREATE TABLE `autor`
 (
     `id`       int(11)                            NOT NULL AUTO_INCREMENT,
     `imie`     varchar(50) COLLATE utf8_polish_ci NOT NULL,
