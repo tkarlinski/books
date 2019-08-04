@@ -19,11 +19,12 @@ class ReadBookType extends AbstractType
             ])
             ->add('startDate', DateType::class, [
                 'label' => 'od',
+                'widget' => 'single_text',
             ])
             ->add('endDate', DateType::class, [
                 'label' => 'do',
+                'widget' => 'single_text',
             ])
-//            ->add('book')
         ;
     }
 
