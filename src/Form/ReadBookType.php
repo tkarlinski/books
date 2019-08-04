@@ -18,7 +18,7 @@ class ReadBookType extends AbstractType
                 'label' => 'Przeczytana',
             ])
             ->add('startDate', DateType::class, [
-                'label' => 'od',
+                'label' => 'w okresie od',
                 'widget' => 'single_text',
             ])
             ->add('endDate', DateType::class, [

@@ -1,5 +1,14 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-
+    {{ form_row(form.title) }}
+    {{ form_row(form.authors) }}
+    {{ form_row(form.isbn) }}
+    {{ form_row(form.publishingHouse) }}
     {{ form_row(form.city) }}
+    {{ form_row(form.publishYear) }}
+    {{ form_row(form.pages) }}
+    <fieldset id="readBooks" class="form-group">
+        {{ form_row(form.readBooks.isRead) }}
+        {{ form_row(form.readBooks.startDate) }}
+        {{ form_row(form.readBooks.endDate) }}
+    </fieldset>
 {{ form_end(form) }}

@@ -131,6 +131,7 @@ form {
 
 }
 .bootstrap-select, .bootstrap-select.show {
+
   .dropdown-toggle, .dropdown-toggle:active, .dropdown-toggle:focus
   {
     background: $black !important;
@@ -161,6 +162,23 @@ hr {
 .notes {
   .btn-group {
     margin-bottom: 10px;
+  }
+}
+
+// readBooks form
+#readBooks {
+  div.form-group {
+    display: inline-block;
+    margin-right: 0.2rem;
+
+    input {
+      display: inline-block !important;
+      width: auto;
+
+      &[type=date] {
+        margin-left: 0.4rem;
+      }
+    }
   }
 }
 
