@@ -63,6 +63,7 @@ class BookType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Book::class,
+            'allow_extra_fields' => true,
         ]);
     }
 }

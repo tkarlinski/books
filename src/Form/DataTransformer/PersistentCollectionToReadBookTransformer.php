@@ -2,7 +2,8 @@
 
 namespace App\Form\DataTransformer;
 
-use App\Entity\ReadBook;
+use App\Entity\ReadBook as ReadBookEntity;
+use App\Form\Model\ReadBook as ReadBookModel;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\PersistentCollection;
@@ -26,29 +27,43 @@ class PersistentCollectionToReadBookTransformer implements DataTransformerInterf
 
     /**
      * @param PersistentCollection $value
-     * @return ReadBook|null
+     * @return ReadBookModel|null
      */
-    public function transform($value): ?ReadBook
+    public function transform($value): ?ReadBookModel
     {
-        $readBook = $value->current();
+        /** @var ReadBookEntity|bool $entity */
+        $entity = $value->current();
 
-        return $readBook instanceof ReadBook ? $readBook : null;
+        if (!$entity) {
+            return null;
+        }
+
+        $model = new ReadBookModel();
+        $model->setIsRead(true);
+        $model->setStartDate($entity->getStartDate());
+        $model->setEndDate($entity->getEndDate());
+
+        return $model;
     }
 
     /**
-     * @param ReadBook|null $value
+     * @param ReadBookModel|null $value
      * @return PersistentCollection
      */
     public function reverseTransform($value)
     {
         $collection = new ArrayCollection();
-        if (null !== $value) {
-            $collection->add($value);
+
+        if ($value instanceof ReadBookModel && $value->isRead()) {
+            $entity = new ReadBookEntity();
+            $entity->setStartDate($value->getStartDate());
+            $entity->setEndDate($value->getEndDate());
+            $collection->add($entity);
         }
 
         return new PersistentCollection(
             $this->em,
-            $this->em->getClassMetadata(ReadBook::class),
+            $this->em->getClassMetadata(ReadBookEntity::class),
             $collection
         );
     }

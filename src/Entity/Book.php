@@ -72,7 +72,7 @@ class Book
     private $authors;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ReadBook", mappedBy="book", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\ReadBook", mappedBy="book", orphanRemoval=true, cascade={"persist"})
      */
     private $readBooks;
 
