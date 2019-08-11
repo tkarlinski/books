@@ -52,11 +52,6 @@ class Book
     private $publishingHouse;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="book", orphanRemoval=true)
-     */
-    private $note;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="books")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -76,9 +71,13 @@ class Book
      */
     private $readBooks;
 
+    /**
+     * @ORM\Column(name="notatka", type="text", nullable=true)
+     */
+    private $note;
+
     public function __construct()
     {
-        $this->note = new ArrayCollection();
         $this->authors = new ArrayCollection();
         $this->readBooks = new ArrayCollection();
     }
@@ -165,37 +164,6 @@ class Book
         return $this;
     }
 
-    /**
-     * @return Collection|Note[]
-     */
-    public function getNote(): Collection
-    {
-        return $this->note;
-    }
-
-    public function addNote(Note $note): self
-    {
-        if (!$this->note->contains($note)) {
-            $this->note[] = $note;
-            $note->setBook($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNote(Note $note): self
-    {
-        if ($this->note->contains($note)) {
-            $this->note->removeElement($note);
-            // set the owning side to null (unless already changed)
-            if ($note->getBook() === $this) {
-                $note->setBook(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -261,6 +229,18 @@ class Book
                 $readBook->setBook(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNote(): ?string
+    {
+        return $this->note;
+    }
+
+    public function setNote(?string $note): self
+    {
+        $this->note = $note;
 
         return $this;
     }
