@@ -48,6 +48,9 @@ class BookType extends AbstractType
             ->add('readBooks', ReadBookType::class, [
                 'label' => 'Przeczytana'
             ])
+            ->add('note', null, [
+                'label' => 'Notatka'
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Zapisz',
                 'attr' => [
