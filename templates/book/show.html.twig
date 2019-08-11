@@ -9,7 +9,7 @@
         </div>
         <div class="col-1">
             <div class="btn-group pull-right" role="group">
-                <button type="button" class="btn btn-outline-primary btn-sm">edytuj</button>
+                <a class="btn btn-outline-primary btn-sm" href="{{ path('app_book_edit', {'id': book.id}) }}">edytuj</a>
                 <button type="button" class="btn btn-outline-primary btn-sm">usuń</button>
             </div>
 
@@ -20,19 +20,21 @@
         <tbody>
             <tr>
                 <th>Autor</th>
-                <td>Jan Brzechwa, Cezary Cezary</td>
-            </tr>
-            <tr>
-                <th>Wydawnictwo</th>
-                <td>Gdańska Oficyna Wydawnicza</td>
-            </tr>
-            <tr>
-                <th>Wydano</th>
-                <td>Warszawa, {{ book.publishYear }} rok</td>
+                <td>
+                    {{ book.authors|join(', ') }}
+                </td>
             </tr>
             <tr>
                 <th>Isbn</th>
                 <td>{{ book.isbn }}</td>
+            </tr>
+            <tr>
+                <th>Wydawnictwo</th>
+                <td>{{ book.publishingHouse }}</td>
+            </tr>
+            <tr>
+                <th>Wydano</th>
+                <td>{{ book.city }}, {{ book.publishYear }} rok</td>
             </tr>
             <tr>
                 <th>Ilość stron</th>
@@ -40,7 +42,15 @@
             </tr>
             <tr>
                 <th>Przeczytano</th>
-                <td>Tak (20.01.2019 - 31.01.2019)</td>
+                <td>
+                    {% set readBook = book.readBooks.first %}
+                    {% if (readBook is not empty) %}
+                    Tak
+                        {% if readBook.startDate is not empty and readBook.startDate is not empty %}
+                            ({{ readBook.startDate|date("d.m.Y") }} - {{ readBook.endDate|date("d.m.Y") }})
+                        {% endif %}
+                    {% endif %}
+                </td>
             </tr>
         </tbody>
     </table>
@@ -51,35 +61,8 @@
         </div>
         <div class="col-12">
             <p>
-                Lorem ipsum. Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
+                {{ book.note|nl2br }}
             </p>
-            <span class=""><small>Utworzono: 02.01.2018 23:25 | Edytowano: 01.01.2018 20:25</small></span>
-            <div class="btn-group pull-right" role="group">
-                <button type="button" class="btn btn-outline-primary btn-sm">edytuj</button>
-                <button type="button" class="btn btn-outline-primary btn-sm">usuń</button>
-            </div>
-        </div>
-        <div class="col-12">
-            <hr>
-        </div>
-        <div class="col-12">
-            <p>
-                Lorem ipsum. Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-                Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.Lorem ipsum.
-            </p>
-            <span class=""><small>Utworzono: 02.01.2018 23:25 | Edytowano: 01.01.2018 20:25</small></span>
-
-            <div class="btn-group pull-right" role="group">
-                <button type="button" class="btn btn-outline-primary btn-sm">edytuj</button>
-                <button type="button" class="btn btn-outline-primary btn-sm">usuń</button>
-            </div>
         </div>
     </div>
 
