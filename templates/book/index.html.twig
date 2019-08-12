@@ -9,20 +9,26 @@
     <table class="table rounded table-bordered">
         <thead>
         <tr>
+            <th>Nr</th>
             <th scope="col">Tytuł</th>
-            <th scope="col">Rok wydania</th>
-            <th scope="col">Stron</th>
-            <th scope="col">ISBN</th>
+            <th scope="col">Autor</th>
+            <th scope="col">Przeczytana</th>
             <th scope="col" class="w-25">Akcje</th>
         </tr>
         </thead>
         <tbody>
         {% for book in books %}
             <tr>
+                <td class="text-right">{{ loop.index }}.</td>
                 <td>{{ book.title }}</td>
-                <td>{{ book.publishYear }}</td>
-                <td>{{ book.pages }}</td>
-                <td>{{ book.isbn }}</td>
+                <td>{{ book.authors|join(', ') }}</td>
+                <td class="text-center">
+                    {% if (book.readBooks.first is not empty) %}
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    {% endif %}
+                </td>
                 <td class="w-25">
                     <a class="btn btn-outline-primary btn-sm"
                        href="{{ path('app_book_show', {'id': book.id}) }}">szczegóły</a>
