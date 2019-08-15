@@ -8,15 +8,16 @@ use App\Entity\City;
 use App\Entity\PublishingHouse;
 use App\Entity\ReadBook;
 use App\Entity\User;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class BookFixtures extends BaseFixture
+class BookFixtures extends BaseFixture implements DependentFixtureInterface
 {
     const MAIN_GROUP = 'main_books';
 
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(30, self::MAIN_GROUP, function () {
+        $this->createMany(200, self::MAIN_GROUP, function () use ($manager) {
             $book = new Book();
             $book->setIsbn($this->faker->isbn10);
             if ($this->faker->boolean(40)) {
@@ -32,6 +33,8 @@ class BookFixtures extends BaseFixture
                     $startDate = $this->faker->dateTime;
                     $readBook->setStartDate($startDate);
                     $readBook->setEndDate($this->faker->dateTimeBetween($startDate, 'now'));
+
+                    $manager->persist($readBook);
                 }
             }
 

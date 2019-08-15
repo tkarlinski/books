@@ -11,7 +11,7 @@ class PublishingHouseFixtures extends BaseFixture
 
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(30, self::MAIN_GROUP, function() {
+        $this->createMany(80, self::MAIN_GROUP, function() {
             $pubHouse = new PublishingHouse();
             $pubHouse->setName($this->faker->company);
 

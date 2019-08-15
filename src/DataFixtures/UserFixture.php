@@ -22,7 +22,7 @@ class UserFixture extends BaseFixture
 
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(30, self::MAIN_GROUP, function() {
+        $this->createMany(1, self::MAIN_GROUP, function() {
             $user = new User();
             $user->setEmail('karlinski.tomasz@gmail.com')
                 ->setFirstName('tom')
