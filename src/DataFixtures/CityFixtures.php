@@ -11,7 +11,7 @@ class CityFixtures extends BaseFixture
 
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(30, self::MAIN_GROUP, function() {
+        $this->createMany(39, self::MAIN_GROUP, function() {
             $city = new City();
             $city->setName($this->faker->city);
 

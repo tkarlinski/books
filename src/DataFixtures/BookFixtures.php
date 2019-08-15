@@ -17,7 +17,7 @@ class BookFixtures extends BaseFixture implements DependentFixtureInterface
 
     public function loadData(ObjectManager $manager): void
     {
-        $this->createMany(200, self::MAIN_GROUP, function () use ($manager) {
+        $this->createMany(85, self::MAIN_GROUP, function () use ($manager) {
             $book = new Book();
             $book->setIsbn($this->faker->isbn10);
             if ($this->faker->boolean(40)) {
