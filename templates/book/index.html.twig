@@ -33,9 +33,11 @@
         </tr>
         </thead>
         <tbody>
-        {% for book in books %}
+        {% for book in pagination %}
             <tr>
-                <td class="text-right">{{ loop.index }}.</td>
+                <td class="text-right">
+                    {{ loop.index + (pagination.currentPageNumber - 1) * pagination.itemNumberPerPage}}.
+                </td>
                 <td>{{ book.title }}</td>
                 <td>{{ book.authors|join(', ') }}</td>
                 <td class="text-center">
@@ -61,5 +63,9 @@
         {% endfor %}
         </tbody>
     </table>
+
+    <div class="navigation">
+        {{ knp_pagination_render(pagination, null, {}, {'align': 'center'}) }}
+    </div>
 
 {% endblock %}

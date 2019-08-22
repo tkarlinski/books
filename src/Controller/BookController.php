@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Form\BookType;
 use App\Repository\BookRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Exception\LogicException;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,10 +20,17 @@ class BookController extends AbstractController
     /**
      * @Route("/", name="app_book_index", methods={"GET"})
      */
-    public function index(BookRepository $bookRepository): Response
+    public function index(Request $request, BookRepository $bookRepository, PaginatorInterface $paginator): Response
     {
+        $query = $bookRepository->getWithSearchQuery(null);
+
+        $pagination = $paginator->paginate(
+            $query,
+            $request->query->getInt('page', 1)
+        );
+
         return $this->render('book/index.html.twig', [
-            'books' => $bookRepository->findAll(),
+            'pagination' => $pagination,
         ]);
     }
 
@@ -88,7 +96,7 @@ class BookController extends AbstractController
      */
     public function delete(Request $request, Book $book): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $book->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($book);
             $entityManager->flush();

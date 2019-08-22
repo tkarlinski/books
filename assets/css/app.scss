@@ -38,6 +38,22 @@ $table-head-color: $greenColor;
 $input-color-placeholder: #443322 !default;
 $input-alt-color-placeholder: #443322 !default;
 
+// pagination:
+
+$pagination-bg: $backgroundColor;
+$pagination-border-color: $fontStandardColor;
+//$pagination-color: $fontStandardColor;
+
+$pagination-disabled-bg: $backgroundColor;
+$pagination-disabled-border-color: $fontStandardColor;
+$pagination-disabled-color: $fontStandardColor;
+
+$pagination-active-color: $backgroundColor;
+
+$pagination-hover-bg: $lightBackgroundColor;
+$pagination-hover-border-color: $fontStandardColor;
+$pagination-hover-color: $yellowColor;
+
 @import "~bootstrap";
 @import "~bootstrap-select/sass/bootstrap-select";
 @import "~font-awesome";
