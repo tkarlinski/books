@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Form\BookFilterType;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -17,20 +18,31 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BookController extends AbstractController
 {
+    const LIST_DEFAULT_LIMIT = 20;
+
     /**
      * @Route("/", name="app_book_index", methods={"GET"})
      */
-    public function index(Request $request, BookRepository $bookRepository, PaginatorInterface $paginator): Response
+    public function index(
+        Request $request,
+        BookRepository $bookRepository,
+        PaginatorInterface $paginator
+    ): Response
     {
+        $filterForm = $this->createForm(BookFilterType::class);
+
+        // criteria
         $query = $bookRepository->getWithSearchQuery(null);
 
         $pagination = $paginator->paginate(
             $query,
-            $request->query->getInt('page', 1)
+            $request->query->getInt('page', 1),
+            self::LIST_DEFAULT_LIMIT
         );
 
         return $this->render('book/index.html.twig', [
             'pagination' => $pagination,
+            'filterForm' => $filterForm->createView(),
         ]);
     }
 

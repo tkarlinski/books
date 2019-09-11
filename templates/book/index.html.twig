@@ -6,21 +6,33 @@
 
     {% include '_layout/list_header.html.twig' with {'header': 'Książki', 'path_add': 'app_book_new'} %}
 
-    <form class="form-inline">
-        <div class="form-group mb-2">
-            <label for="staticEmail2" class="sr-only">Email</label>
-            <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <label for="inputPassword2" class="sr-only">Password</label>
-            <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-        </div>
-        <div class="form-group mx-sm-3 mb-2">
-            <label for="inputPassword2" class="sr-only">Password</label>
-            <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
-    </form>
+    {{ form_start(filterForm, {'attr': {'class': 'form-inline'}}) }}
+    <div class="form-group mx-sm-2 mb-1">
+        {{ form_errors(filterForm.title) }}
+        {{ form_widget(filterForm.title, {'attr': {'placeholder': 'Tytuł'}}) }}
+    </div>
+    <div class="form-group mx-sm-2 mb-1">
+        {{ form_errors(filterForm.author) }}
+        {{ form_widget(filterForm.author, {'attr': {'placeholder': 'Autor'}}) }}
+    </div>
+    <div class="form-group mx-sm-2 mb-1">
+        {{ form_errors(filterForm.isbn) }}
+        {{ form_widget(filterForm.isbn, {'attr': {'placeholder': 'ISBN'}}) }}
+    </div>
+    <div class="form-group mx-sm-2 mb-1">
+        {{ form_errors(filterForm.publishingHouse) }}
+        {{ form_widget(filterForm.publishingHouse, {'attr': {'placeholder': 'Wydawnictwo'}}) }}
+    </div>
+    <div class="form-group mx-sm-2 mb-1">
+        {{ form_errors(filterForm.isRead) }}
+        {{ form_label(filterForm.isRead) }}
+        {{ form_widget(filterForm.isRead) }}
+    </div>
+    <div class="form-group mx-sm-2 mb-1">
+        {{ form_widget(filterForm.submit, {'attr': {'class': 'btn-primary'}}) }}
+    </div>
+    {{ form_end(filterForm, {'attr': {'class': 'form-group mx-sm-3 mb-2'}}) }}
+
 
     <table class="table rounded table-bordered">
         <thead>
