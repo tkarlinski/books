@@ -2,7 +2,10 @@
 
 namespace App\Repository;
 
+use App\Book\BookCriteria;
+use App\Entity\Author;
 use App\Entity\Book;
+use App\Entity\PublishingHouse;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -20,43 +23,43 @@ class BookRepository extends ServiceEntityRepository
         parent::__construct($registry, Book::class);
     }
 
-    public function getWithSearchQuery(?string $terms): Query
+    public function getWithSearchQuery(BookCriteria $bookCriteria): Query
     {
         $em = $this->getEntityManager();
         $dql = '
             SELECT b 
             FROM App\Entity\Book b
+            LEFT JOIN b.authors a
+            LEFT JOIN b.readBooks rb
+            WHERE 1=1
         ';
 
-        return $em->createQuery($dql);
-    }
+        $parameters = [];
 
-    // /**
-    //  * @return Book[] Returns an array of Book objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('b.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        if (is_string($bookCriteria->getTitle())) {
+            $dql .= ' AND LOWER(b.title) LIKE LOWER(:title)';
+            $parameters['title'] = '%' . $bookCriteria->getTitle() . '%';
+        }
+        if ($bookCriteria->getAuthor() instanceof Author) {
+            $dql .= ' AND a.id = :authorId';
+            $parameters['authorId'] = $bookCriteria->getAuthor()->getId();
+        }
+        if (is_string($bookCriteria->getIsbn())) {
+            $dql .= ' AND LOWER(b.isbn) LIKE LOWER(:isbn)';
+            $parameters['isbn'] = '%' . $bookCriteria->getIsbn() . '%';
+        }
+        if ($bookCriteria->getPublishingHouse() instanceof PublishingHouse) {
+            $dql .= ' AND a.id = :publichinHouseId';
+            $parameters['publichinHouseId'] = $bookCriteria->getPublishingHouse()->getId();
+        }
+        if (is_bool($bookCriteria->isRead())) {
+            if ($bookCriteria->isRead()) {
+                $dql .= ' AND rb.id IS NOT NULL';
+            } else {
+                $dql .= ' AND rb.id IS NULL';
+            }
+        }
 
-    /*
-    public function findOneBySomeField($value): ?Book
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $em->createQuery($dql)->setParameters($parameters);
     }
-    */
 }

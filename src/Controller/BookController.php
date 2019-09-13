@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Book\BookCriteria;
 use App\Entity\Book;
 use App\Form\BookFilterType;
 use App\Form\BookType;
@@ -29,10 +30,17 @@ class BookController extends AbstractController
         PaginatorInterface $paginator
     ): Response
     {
-        $filterForm = $this->createForm(BookFilterType::class);
+        $bookCriteria = new BookCriteria();
 
+        $filterForm = $this->createForm(BookFilterType::class, $bookCriteria);
+        $filterForm->handleRequest($request);
+
+        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+            /** @var BookCriteria $bookCriteria */
+            $bookCriteria = $filterForm->getData();
+        }
         // criteria
-        $query = $bookRepository->getWithSearchQuery(null);
+        $query = $bookRepository->getWithSearchQuery($bookCriteria);
 
         $pagination = $paginator->paginate(
             $query,

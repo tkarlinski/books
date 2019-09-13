@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
-use App\Book\Model\BookCriteria;
+use App\Book\BookCriteria;
+use App\Entity\Author;
+use App\Entity\PublishingHouse;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -14,12 +17,23 @@ class BookFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title')
-            ->add('author')
-            ->add('isbn')
-            ->add('publishingHouse')
+            ->add('title', null, [
+                'required' => false,
+            ])
+            ->add('author', EntityType::class, [
+                'required' => false,
+                'class' => Author::class,
+            ])
+            ->add('isbn', null, [
+                'required' => false,
+            ])
+            ->add('publishingHouse', EntityType::class, [
+                'required' => false,
+                'class' => PublishingHouse::class,
+            ])
             ->add('isRead', CheckboxType::class, [
-                'label' => 'Czy przeczytano?'
+                'label' => 'Czy przeczytano?',
+                'required' => false,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Wyszukaj',
@@ -34,6 +48,7 @@ class BookFilterType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => BookCriteria::class,
+            'method' => 'GET',
         ]);
     }
 }

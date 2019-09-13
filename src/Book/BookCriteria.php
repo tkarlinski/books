@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Book\Model;
+namespace App\Book;
 
 use App\Entity\Author;
 use App\Entity\PublishingHouse;
@@ -28,7 +28,7 @@ class BookCriteria
     /** @var bool */
     private $isRead;
 
-    public function getIsbn(): string
+    public function getIsbn(): ?string
     {
         return $this->isbn;
     }
@@ -38,7 +38,7 @@ class BookCriteria
         $this->isbn = $isbn;
     }
 
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -48,7 +48,7 @@ class BookCriteria
         $this->title = $title;
     }
 
-    public function getAuthor(): Author
+    public function getAuthor(): ?Author
     {
         return $this->author;
     }
@@ -58,7 +58,7 @@ class BookCriteria
         $this->author = $author;
     }
 
-    public function getPublishingHouse(): PublishingHouse
+    public function getPublishingHouse(): ?PublishingHouse
     {
         return $this->publishingHouse;
     }
@@ -68,7 +68,7 @@ class BookCriteria
         $this->publishingHouse = $publishingHouse;
     }
 
-    public function isRead(): bool
+    public function isRead(): ?bool
     {
         return $this->isRead;
     }
