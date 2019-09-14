@@ -30,6 +30,7 @@ class BookRepository extends ServiceEntityRepository
             SELECT b 
             FROM App\Entity\Book b
             LEFT JOIN b.authors a
+            LEFT JOIN b.publishingHouse pb
             LEFT JOIN b.readBooks rb
             WHERE 1=1
         ';
@@ -49,7 +50,7 @@ class BookRepository extends ServiceEntityRepository
             $parameters['isbn'] = '%' . $bookCriteria->getIsbn() . '%';
         }
         if ($bookCriteria->getPublishingHouse() instanceof PublishingHouse) {
-            $dql .= ' AND a.id = :publichinHouseId';
+            $dql .= ' AND pb.id = :publichinHouseId';
             $parameters['publichinHouseId'] = $bookCriteria->getPublishingHouse()->getId();
         }
         if (is_bool($bookCriteria->isRead())) {

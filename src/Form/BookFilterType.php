@@ -49,8 +49,8 @@ class BookFilterType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
                 'choices' => [
-                    'Tak' =>'1',
-                    'Nie' => '2'
+                    'Tak' => '1',
+                    'Nie' => '0'
                 ],
                 'required' => false,
                 'attr' => [
