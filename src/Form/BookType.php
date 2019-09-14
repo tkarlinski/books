@@ -29,15 +29,24 @@ class BookType extends AbstractType
             ])
             ->add('authors', null, [
                 'label' => 'Autorzy',
+                'attr' => [
+                    'data-live-search' => 'true',
+                ]
             ])
             ->add('isbn', TextType::class, [
                 'label' => 'ISBN',
             ])
             ->add('publishingHouse', null, [
                 'label' => 'Wydawnictwo',
+                'attr' => [
+                    'data-live-search' => 'true',
+                ]
             ])
             ->add('city', null, [
                 'label' => 'Miasto',
+                'attr' => [
+                    'data-live-search' => 'true',
+                ]
             ])
             ->add('publishYear', IntegerType::class, [
                 'label' => 'Rok wydania',
