@@ -9,23 +9,22 @@
     {{ form_start(filterForm, {'attr': {'class': 'form-inline'}}) }}
     <div class="form-group mx-sm-2 mb-1">
         {{ form_errors(filterForm.title) }}
-        {{ form_widget(filterForm.title, {'attr': {'placeholder': 'Tytuł'}}) }}
+        {{ form_widget(filterForm.title) }}
     </div>
     <div class="form-group mx-sm-2 mb-1">
         {{ form_errors(filterForm.author) }}
-        {{ form_widget(filterForm.author, {'attr': {'placeholder': 'Autor'}}) }}
+        {{ form_widget(filterForm.author) }}
     </div>
     <div class="form-group mx-sm-2 mb-1">
         {{ form_errors(filterForm.isbn) }}
-        {{ form_widget(filterForm.isbn, {'attr': {'placeholder': 'ISBN'}}) }}
+        {{ form_widget(filterForm.isbn) }}
     </div>
     <div class="form-group mx-sm-2 mb-1">
         {{ form_errors(filterForm.publishingHouse) }}
-        {{ form_widget(filterForm.publishingHouse, {'attr': {'placeholder': 'Wydawnictwo'}}) }}
+        {{ form_widget(filterForm.publishingHouse) }}
     </div>
     <div class="form-group mx-sm-2 mb-1">
         {{ form_errors(filterForm.isRead) }}
-        {{ form_label(filterForm.isRead) }}
         {{ form_widget(filterForm.isRead) }}
     </div>
     <div class="form-group mx-sm-2 mb-1">

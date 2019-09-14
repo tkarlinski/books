@@ -13,19 +13,19 @@ use App\Entity\PublishingHouse;
  */
 class BookCriteria
 {
-    /** @var string */
+    /** @var null|string */
     private $isbn;
 
-    /** @var string */
+    /** @var null|string */
     private $title;
 
-    /** @var Author */
+    /** @var null|Author */
     private $author;
 
-    /** @var PublishingHouse */
+    /** @var null|PublishingHouse */
     private $publishingHouse;
 
-    /** @var bool */
+    /** @var null|bool */
     private $isRead;
 
     public function getIsbn(): ?string

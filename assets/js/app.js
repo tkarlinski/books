@@ -5,7 +5,7 @@ import 'bootstrap-select';
 
 $('select').selectpicker({
     noneSelectedText: 'Wybierz...',
-    liveSearch: true,
+    // liveSearch: true,
     liveSearchPlaceholder: 'Wyszukaj...',
     liveSearchNormalize: true
 });
