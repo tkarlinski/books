@@ -13,11 +13,15 @@
 <div class="container">
 
     {{ include('_layout/menu.html.twig') }}
+
+    {{ include('_layout/flash_messages.html.twig') }}
+
     <div class="row">
         <div class="col-md" id="content-page">
             {% block body %}{% endblock %}
         </div>
     </div>
+
 </div>
 
 {% block javascripts %}

@@ -10,6 +10,7 @@ use App\Repository\BookRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Exception\LogicException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -116,12 +117,17 @@ class BookController extends AbstractController
      */
     public function delete(Request $request, Book $book): Response
     {
-        if ($this->isCsrfTokenValid('delete' . $book->getId(), $request->request->get('_token'))) {
+        try {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($book);
             $entityManager->flush();
+        } catch (\Exception $e) {
+            $this->addFlash('error', sprintf('Nie udało się usunąć książki "%s".', $book->getTitle()));
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
 
-        return $this->redirectToRoute('app_book_index');
+        $this->addFlash('success', sprintf('Usunięto książkę "%s".', $book->getTitle()));
+
+        return new JsonResponse();
     }
 }

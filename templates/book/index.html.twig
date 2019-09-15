@@ -63,7 +63,9 @@
                        href="{{ path('app_book_show', {'id': book.id}) }}">szczegóły</a>
                     <a class="btn btn-outline-primary btn-sm"
                        href="{{ path('app_book_edit', {'id': book.id}) }}">edytuj</a>
-                    <a class="btn btn-outline-primary btn-sm"
+                    <a class="btn btn-outline-primary btn-sm btn-delete"
+                       data-element-title="{{ book.title }}"
+                       data-element-id="{{ book.id }}"
                        href="{{ path('app_book_delete', {'id': book.id}) }}">usuń</a>
                 </td>
             </tr>
@@ -78,5 +80,7 @@
     <div class="navigation">
         {{ knp_pagination_render(pagination, null, {}, {'align': 'center'}) }}
     </div>
+
+    {% include '_layout/modal.html.twig' %}
 
 {% endblock %}
