@@ -6,6 +6,7 @@ use App\Entity\PublishingHouse;
 use App\Form\PublishingHouseType;
 use App\Repository\PublishingHouseRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -83,14 +84,20 @@ class PublishingHouseController extends AbstractController
     /**
      * @Route("/{id}", name="app_publishinghouse_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, PublishingHouse $publishingHouse): Response
+    public function delete(PublishingHouse $publishingHouse): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$publishingHouse->getId(), $request->request->get('_token'))) {
+        try {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($publishingHouse);
             $entityManager->flush();
+        } catch (\Exception $e) {
+            $this->addFlash('error', sprintf('Nie udało się usunąć wydawnictwa "%s".', $publishingHouse->getName()));
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
 
-        return $this->redirectToRoute('app_publishinghouse_index');
+        $this->addFlash('success', sprintf('Usunięto wydawnictwo "%s".', $publishingHouse->getName()));
+
+        return new JsonResponse();
+
     }
 }
