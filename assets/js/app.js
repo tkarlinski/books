@@ -28,14 +28,21 @@ var modalConfirm = function(callback){
     $("#modal-btn-yes").on("click", function(){
         callback(true);
 
-        var href = $("[data-element-id=" + $(this).attr("delete-element-id") + "]").attr('href');
-        var xhr = new XMLHttpRequest();
+        let buttonDelete = $("[data-element-id=" + $(this).attr("delete-element-id") + "]");
+        let href = buttonDelete.attr('href');
+        const backLink = buttonDelete.attr('back-link');
+
+        let xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    location.reload();
+                    if (typeof backLink !== typeof undefined && backLink !== false) {
+                        location.replace(backLink);
+                    } else {
+                        location.reload();
+                    }
                 } else {
-                    alert('Wystąpił błąd podczas usuwania');
+                    location.reload();
                 }
             }
         };

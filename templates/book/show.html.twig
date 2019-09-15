@@ -10,11 +10,17 @@
         <div class="col-1">
             <div class="btn-group pull-right" role="group">
                 <a class="btn btn-outline-primary btn-sm" href="{{ path('app_book_edit', {'id': book.id}) }}">edytuj</a>
-                <button type="button" class="btn btn-outline-primary btn-sm">usuń</button>
+                <a class="btn btn-outline-primary btn-sm btn-delete"
+                   back-link="{{ path('app_book_index') }}"
+                   data-element-title="{{ book.title }}"
+                   data-element-id="{{ book.id }}"
+                   href="{{ path('app_book_delete', {'id': book.id}) }}">usuń</a>
             </div>
 
         </div>
     </div>
+
+
 
     <table class="table">
         <tbody>
@@ -66,7 +72,8 @@
         </div>
     </div>
 
-{#    {{ include('book/_delete_form.html.twig') }}#}
-
     {{ include('_layout/back_link.html.twig', {'path_list': 'app_book_index'}) }}
+
+    {% include '_layout/modal_delete.html.twig' %}
+
 {% endblock %}
