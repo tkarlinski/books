@@ -6,6 +6,7 @@ use App\Entity\City;
 use App\Form\CityType;
 use App\Repository\CityRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -83,14 +84,19 @@ class CityController extends AbstractController
     /**
      * @Route("/{id}", name="app_city_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, City $city): Response
+    public function delete(City $city): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$city->getId(), $request->request->get('_token'))) {
+        try {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($city);
             $entityManager->flush();
+        } catch (\Exception $e) {
+            $this->addFlash('error', sprintf('Nie udało się usunąć miejsca wydania "%s".', $city->getName()));
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
 
-        return $this->redirectToRoute('app_city_index');
+        $this->addFlash('success', sprintf('Usunięto miejsce wydania "%s".', $city->getName()));
+
+        return new JsonResponse();
     }
 }

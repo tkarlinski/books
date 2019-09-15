@@ -20,7 +20,9 @@
                 <td class="w-25">
                     <a class="btn btn-outline-primary btn-sm"
                        href="{{ path('app_city_edit', {'id': city.id}) }}">edytuj</a>
-                    <a class="btn btn-outline-primary btn-sm"
+                    <a class="btn btn-outline-primary btn-sm btn-delete"
+                       data-element-title="{{ city.name }}"
+                       data-element-id="{{ city.id }}"
                        href="{{ path('app_city_delete', {'id': city.id}) }}">usuń</a>
                 </td>
             </tr>
@@ -32,5 +34,6 @@
         </tbody>
     </table>
 
+    {% include '_layout/modal_delete.html.twig' %}
 
 {% endblock %}
