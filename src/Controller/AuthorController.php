@@ -6,6 +6,7 @@ use App\Entity\Author;
 use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -83,14 +84,21 @@ class AuthorController extends AbstractController
     /**
      * @Route("/{id}", name="app_author_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Author $author): Response
+    public function delete(Author $author): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$author->getId(), $request->request->get('_token'))) {
+        try {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($author);
             $entityManager->flush();
+        } catch (\Exception $e) {
+            $this->addFlash('error',
+                sprintf('Nie udało się usunąć autora "%s %s".', $author->getName(), $author->getSurname()));
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
 
-        return $this->redirectToRoute('app_author_index');
+        $this->addFlash('success',
+            sprintf('Usunięto autora "%s %s".', $author->getName(), $author->getSurname()));
+
+        return new JsonResponse();
     }
 }
