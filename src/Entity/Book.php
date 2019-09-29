@@ -72,7 +72,7 @@ class Book
     private $readBooks;
 
     /**
-     * @ORM\Column(name="notatka", type="text", nullable=true)
+     * @ORM\Column(name="uwagi", type="text", nullable=true)
      */
     private $note;
 
