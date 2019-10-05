@@ -30,7 +30,7 @@ class Book
     private $publishYear;
 
     /**
-     * @ORM\Column(name="strony", type="smallint")
+     * @ORM\Column(name="strony", type="smallint", nullable=true)
      */
     private $pages;
 
