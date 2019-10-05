@@ -60,9 +60,9 @@ class Book
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Author", inversedBy="books")
      * @ORM\JoinTable(name="autor_ksiazka",
-     *      joinColumns={@ORM\JoinColumn(name="id_autor", referencedColumnName="id")},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="id_ksiazka", referencedColumnName="id")}
-     *      )
+     *      joinColumns={@ORM\JoinColumn(name="id_ksiazka", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_autor", referencedColumnName="id")}
+     *      )/var/www/html/application/src/Migrations/Version20191005110429.php
      */
     private $authors;
 
