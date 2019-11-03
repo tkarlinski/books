@@ -27,7 +27,7 @@ class BookRepository extends ServiceEntityRepository
     {
         $em = $this->getEntityManager();
         $dql = '
-            SELECT b 
+            SELECT b, a, pb, rb
             FROM App\Entity\Book b
             LEFT JOIN b.authors a
             LEFT JOIN b.publishingHouse pb
