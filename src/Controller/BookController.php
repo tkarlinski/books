@@ -7,6 +7,7 @@ use App\Entity\Book;
 use App\Form\BookFilterType;
 use App\Form\BookType;
 use App\Repository\BookRepository;
+use App\Service\BookService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Exception\LogicException;
@@ -27,10 +28,12 @@ class BookController extends AbstractController
      */
     public function index(
         Request $request,
+        BookService $bookService,
         BookRepository $bookRepository,
         PaginatorInterface $paginator
     ): Response
     {
+
         $bookCriteria = new BookCriteria();
 
         $filterForm = $this->createForm(BookFilterType::class, $bookCriteria);
@@ -40,6 +43,7 @@ class BookController extends AbstractController
             /** @var BookCriteria $bookCriteria */
             $bookCriteria = $filterForm->getData();
         }
+
         // criteria
         $query = $bookRepository->getWithSearchQuery($bookCriteria);
 
@@ -48,6 +52,8 @@ class BookController extends AbstractController
             $request->query->getInt('page', 1),
             self::LIST_DEFAULT_LIMIT
         );
+
+        $bookService->saveLastListUrl($request->getUri());
 
         return $this->render('book/index.html.twig', [
             'pagination' => $pagination,
@@ -96,12 +102,13 @@ class BookController extends AbstractController
     public function edit(Request $request, Book $book): Response
     {
         $form = $this->createForm(BookType::class, $book);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('app_book_index', [
+            return $this->redirectToRoute('app_book_show', [
                 'id' => $book->getId(),
             ]);
         }
@@ -115,7 +122,7 @@ class BookController extends AbstractController
     /**
      * @Route("/{id}", name="app_book_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Book $book): Response
+    public function delete(Book $book): Response
     {
         try {
             $entityManager = $this->getDoctrine()->getManager();

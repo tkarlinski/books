@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use App\Book\Book;
 use App\Entity\ReadBook;
+use App\Service\BookService;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -18,6 +19,16 @@ class BookExtension extends AbstractExtension
     const READ_BOOK_TRUE = '<i class="fa fa-check" aria-hidden="true" title="Tak"></i>';
     const READ_BOOK_FALSE = '<i class="fa fa-times" aria-hidden="true" title="Nie"></i>';
 
+    /** @var BookService */
+    protected $bookService;
+
+    /**
+     * @required
+     */
+    public function setBookService(BookService $bookService)
+    {
+        $this->bookService = $bookService;
+    }
 
     public function getFunctions()
     {
@@ -26,6 +37,10 @@ class BookExtension extends AbstractExtension
                 'isRead',
                 [$this, 'isRead'],
                 array('is_safe' => array('html'))
+            ),
+            new TwigFunction(
+                'getCurrentListUrl',
+                [$this, 'getCurrentListUrl']
             ),
         ];
     }
@@ -44,5 +59,10 @@ class BookExtension extends AbstractExtension
         } else {
             return self::READ_BOOK_FALSE;
         }
+    }
+
+    public function getCurrentListUrl(): string
+    {
+        return $this->bookService->getCurrentListUrl();
     }
 }
