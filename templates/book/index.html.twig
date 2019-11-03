@@ -52,11 +52,8 @@
                 <td>{{ book.title }}</td>
                 <td>{{ book.authors|join(', ') }}</td>
                 <td class="text-center">
-                    {% if (book.readBooks.first is not empty) %}
-                        <i class="fa fa-check" aria-hidden="true"></i>
-                    {% else %}
-                        <i class="fa fa-times" aria-hidden="true"></i>
-                    {% endif %}
+                    {% set readBook = book.readBooks.first %}
+                    {{ isRead(readBook) }}
                 </td>
                 <td class="w-25">
                     <a class="btn btn-outline-primary btn-sm"

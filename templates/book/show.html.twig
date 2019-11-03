@@ -48,10 +48,16 @@
                 <th>Przeczytano</th>
                 <td>
                     {% set readBook = book.readBooks.first %}
+                    {{ isRead(readBook) }}
+
                     {% if (readBook is not empty) %}
-                    Tak
-                        {% if readBook.startDate is not empty and readBook.startDate is not empty %}
-                            ({{ readBook.startDate|date("d.m.Y") }} - {{ readBook.endDate|date("d.m.Y") }})
+                        {% if readBook.startDate is not empty %}
+                            ({{ readBook.startDate|date("d.m.Y") }} -
+                            {% if readBook.endDate is not empty %}
+                                {{ readBook.endDate|date("d.m.Y") }})
+                            {% else %}
+                                obecnie)
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 </td>
