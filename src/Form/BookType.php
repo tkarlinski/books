@@ -50,6 +50,7 @@ class BookType extends AbstractType
             ])
             ->add('publishYear', IntegerType::class, [
                 'label' => 'Rok wydania',
+                'required' => false,
             ])
             ->add('pages', IntegerType::class, [
                 'label' => 'Stron',
