@@ -50,7 +50,11 @@ class BookController extends AbstractController
         $pagination = $paginator->paginate(
             $query,
             $request->query->getInt('page', 1),
-            self::LIST_DEFAULT_LIMIT
+            self::LIST_DEFAULT_LIMIT,
+            [
+                'defaultSortFieldName' => 'b.id',
+                'defaultSortDirection' => 'asc'
+            ]
         );
 
         $bookService->saveLastListUrl($request->getUri());
