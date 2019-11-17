@@ -29,7 +29,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Isbn</th>
+                <th>ISBN</th>
                 <td>{{ book.isbn }}</td>
             </tr>
             <tr>
@@ -38,11 +38,22 @@
             </tr>
             <tr>
                 <th>Wydano</th>
-                <td>{{ book.city }}, {{ book.publishYear }} rok</td>
+                <td>
+                    {% if book.city is not null %}
+                        {{ book.city }}
+                        {% if book.publishYear is not null %}
+                            ,
+                        {% endif %}
+                    {% endif %}
+                    {% if book.publishYear is not null %}
+                        {{ book.publishYear }} rok
+                    {% endif %}
+                </td>
             </tr>
             <tr>
                 <th>Ilość stron</th>
-                <td>{{ book.pages }}</td>
+                <td>
+                    {{ book.pages }}</td>
             </tr>
             <tr>
                 <th>Przeczytano</th>
