@@ -35,6 +35,7 @@ class BookType extends AbstractType
             ])
             ->add('isbn', TextType::class, [
                 'label' => 'ISBN',
+                'required' => false,
             ])
             ->add('publishingHouse', null, [
                 'label' => 'Wydawnictwo',
