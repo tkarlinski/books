@@ -76,6 +76,9 @@ class BookController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->get('security.csrf.token_manager')->refreshToken(BookType::CSRF_TOKEN);
+
             $book->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($book);
@@ -110,6 +113,9 @@ class BookController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->get('security.csrf.token_manager')->refreshToken(BookType::CSRF_TOKEN);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('app_book_show', [

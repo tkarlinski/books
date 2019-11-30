@@ -36,6 +36,9 @@ class PublishingHouseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->get('security.csrf.token_manager')->refreshToken(PublishingHouseType::CSRF_TOKEN);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($publishingHouse);
             $entityManager->flush();
@@ -68,6 +71,9 @@ class PublishingHouseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->get('security.csrf.token_manager')->refreshToken(PublishingHouseType::CSRF_TOKEN);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('app_publishinghouse_index', [

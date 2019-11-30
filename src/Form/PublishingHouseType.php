@@ -11,6 +11,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PublishingHouseType extends AbstractType
 {
+    const CSRF_TOKEN = 'publishing_house_form_intention';
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -30,6 +32,9 @@ class PublishingHouseType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => PublishingHouse::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => self::CSRF_TOKEN,
         ]);
     }
 }
