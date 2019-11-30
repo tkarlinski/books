@@ -13,6 +13,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class BookType extends AbstractType
 {
+    const CSRF_TOKEN = 'book_form_intention';
+
     /** @var PersistentCollectionToReadBookTransformer  */
     private $readBookTransformer;
 
@@ -78,6 +80,9 @@ class BookType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Book::class,
             'allow_extra_fields' => true,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => self::CSRF_TOKEN
         ]);
     }
 }

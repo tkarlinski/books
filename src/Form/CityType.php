@@ -11,6 +11,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CityType extends AbstractType
 {
+    const CSRF_TOKEN = 'city_form_intention';
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -29,6 +31,9 @@ class CityType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => City::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => self::CSRF_TOKEN,
         ]);
     }
 }

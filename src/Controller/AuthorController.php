@@ -36,6 +36,9 @@ class AuthorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->get('security.csrf.token_manager')->refreshToken(AuthorType::CSRF_TOKEN);
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($author);
             $entityManager->flush();
@@ -68,6 +71,9 @@ class AuthorController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $this->get('security.csrf.token_manager')->refreshToken(AuthorType::CSRF_TOKEN);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('app_author_index', [
