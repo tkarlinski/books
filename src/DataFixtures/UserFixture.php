@@ -24,8 +24,8 @@ class UserFixture extends BaseFixture
     {
         $this->createMany(1, self::MAIN_GROUP, function() {
             $user = new User();
-            $user->setEmail('dorota.kelsz@gmail.com')
-                ->setFirstName('dorota')
+            $user->setEmail('test@test.com')
+                ->setFirstName('test')
                 ->setPassword($this->passwordEncoder->encodePassword($user, 'test'));
 
             return $user;
