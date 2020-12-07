@@ -55,9 +55,9 @@ class BookRepository extends ServiceEntityRepository
         }
         if (is_bool($bookCriteria->isRead())) {
             if ($bookCriteria->isRead()) {
-                $dql .= ' AND (rb.startDate IS NOT NULL AND rb.endDate IS NOT NULL)';
+                $dql .= ' AND (rb.id IS NOT NULL)';
             } else {
-                $dql .= ' AND (rb.startDate IS NULL OR rb.endDate IS NULL)';
+                $dql .= ' AND (rb.id IS NULL)';
             }
         }
 
