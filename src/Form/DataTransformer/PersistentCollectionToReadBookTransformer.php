@@ -2,7 +2,6 @@
 
 namespace App\Form\DataTransformer;
 
-use App\Book\Book;
 use App\Entity\ReadBook as ReadBookEntity;
 use App\Form\Model\ReadBook as ReadBookModel;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -39,7 +38,7 @@ class PersistentCollectionToReadBookTransformer implements DataTransformerInterf
         }
 
         $model = new ReadBookModel();
-        $model->setIsRead(Book::isRead($entity->getStartDate(), $entity->getEndDate()));
+        $model->setIsRead(true);
         $model->setStartDate($entity->getStartDate());
         $model->setEndDate($entity->getEndDate());
 
@@ -53,7 +52,7 @@ class PersistentCollectionToReadBookTransformer implements DataTransformerInterf
     {
         $collection = new ArrayCollection();
 
-        if ($value instanceof ReadBookModel && $value->getStartDate() instanceof \DateTimeInterface) {
+        if ($value instanceof ReadBookModel && $value->isRead()) {
             $entity = new ReadBookEntity();
             $entity->setStartDate($value->getStartDate());
             $entity->setEndDate($value->getEndDate());

@@ -2,7 +2,6 @@
 
 namespace App\Twig;
 
-use App\Book\Book;
 use App\Entity\ReadBook;
 use App\Service\BookService;
 use Twig\Extension\AbstractExtension;
@@ -50,11 +49,7 @@ class BookExtension extends AbstractExtension
      */
     public function isRead($readBook): string
     {
-        if (!$readBook instanceof ReadBook) {
-            return self::READ_BOOK_FALSE;
-        }
-
-        if (Book::isRead($readBook->getStartDate(), $readBook->getEndDate())) {
+        if ($readBook instanceof ReadBook) {
             return self::READ_BOOK_TRUE;
         } else {
             return self::READ_BOOK_FALSE;

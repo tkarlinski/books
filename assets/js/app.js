@@ -12,8 +12,11 @@ $('select').selectpicker({
 $('#readBooks input[type=date]').change(function () {
     let startDate = $('#book_readBooks_startDate');
     let endDate = $('#book_readBooks_endDate');
+    let isRead = document.getElementById('book_readBooks_isRead');
 
-    $('#book_readBooks_isRead').prop('checked', (startDate.val() && endDate.val()));
+    if (!isRead.checked && startDate.val() && endDate.val()) {
+        isRead.checked = true;
+    }
 });
 
 var modalConfirm = function(callback){
