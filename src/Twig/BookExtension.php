@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use App\Entity\Book;
 use App\Entity\ReadBook;
 use App\Service\BookService;
 use Twig\Extension\AbstractExtension;
@@ -15,8 +16,8 @@ use Twig\TwigFunction;
  */
 class BookExtension extends AbstractExtension
 {
-    const READ_BOOK_TRUE = '<i class="fa fa-check" aria-hidden="true" title="Tak"></i>';
-    const READ_BOOK_FALSE = '<i class="fa fa-times" aria-hidden="true" title="Nie"></i>';
+    const TRUE_ICON = '<i class="fa fa-check" aria-hidden="true" title="Tak"></i>';
+    const FALSE_ICON = '<i class="fa fa-times" aria-hidden="true" title="Nie"></i>';
 
     /** @var BookService */
     protected $bookService;
@@ -38,6 +39,11 @@ class BookExtension extends AbstractExtension
                 array('is_safe' => array('html'))
             ),
             new TwigFunction(
+                'inStock',
+                [$this, 'inStock'],
+                array('is_safe' => array('html'))
+            ),
+            new TwigFunction(
                 'getCurrentListUrl',
                 [$this, 'getCurrentListUrl']
             ),
@@ -50,10 +56,15 @@ class BookExtension extends AbstractExtension
     public function isRead($readBook): string
     {
         if ($readBook instanceof ReadBook) {
-            return self::READ_BOOK_TRUE;
+            return self::TRUE_ICON;
         } else {
-            return self::READ_BOOK_FALSE;
+            return self::FALSE_ICON;
         }
+    }
+
+    public function inStock(Book $book): string
+    {
+        return $book->getInStock() ? self::TRUE_ICON : self::FALSE_ICON;
     }
 
     public function getCurrentListUrl(): string

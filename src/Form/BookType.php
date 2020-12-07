@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Book;
 use App\Form\DataTransformer\PersistentCollectionToReadBookTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -37,6 +38,10 @@ class BookType extends AbstractType
             ])
             ->add('isbn', TextType::class, [
                 'label' => 'ISBN',
+                'required' => false,
+            ])
+            ->add('inStock', CheckboxType::class, [
+                'label' => 'Na stanie',
                 'required' => false,
             ])
             ->add('publishingHouse', null, [

@@ -73,6 +73,9 @@ class BookController extends AbstractController
     {
         $book = new Book();
         $form = $this->createForm(BookType::class, $book);
+        if (!$form->isSubmitted()) {
+            $form->get('inStock')->setData(true);
+        }
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

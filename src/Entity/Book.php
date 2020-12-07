@@ -40,6 +40,11 @@ class Book
     private $isbn;
 
     /**
+     * @ORM\Column(name="na_stanie", type="boolean")
+     */
+    private $inStock;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\City")
      * @ORM\JoinColumn(name="id_miasto", referencedColumnName="id")
      */
@@ -136,6 +141,18 @@ class Book
     public function setIsbn(?string $isbn): self
     {
         $this->isbn = $isbn;
+
+        return $this;
+    }
+
+    public function getInStock()
+    {
+        return $this->inStock;
+    }
+
+    public function setInStock($inStock): self
+    {
+        $this->inStock = $inStock;
 
         return $this;
     }

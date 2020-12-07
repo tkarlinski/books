@@ -28,6 +28,9 @@ class BookCriteria
     /** @var null|bool */
     private $isRead;
 
+    /** @var null|bool */
+    private $inStock;
+
     public function getIsbn(): ?string
     {
         return $this->isbn;
@@ -78,4 +81,13 @@ class BookCriteria
         $this->isRead = $isRead;
     }
 
+    public function inStock(): ?bool
+    {
+        return $this->inStock;
+    }
+
+    public function setInStock(?bool $inStock): void
+    {
+        $this->inStock = $inStock;
+    }
 }

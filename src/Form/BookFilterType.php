@@ -57,6 +57,18 @@ class BookFilterType extends AbstractType
                     'title' => 'Przeczytana?'
                 ]
             ])
+            ->add('inStock', ChoiceType::class, [
+                'expanded' => false,
+                'multiple' => false,
+                'choices' => [
+                    'Tak' => '1',
+                    'Nie' => '0'
+                ],
+                'required' => false,
+                'attr' => [
+                    'title' => 'Na stanie?'
+                ]
+            ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Wyszukaj',
                 'attr' => [

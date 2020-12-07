@@ -60,6 +60,10 @@ class BookRepository extends ServiceEntityRepository
                 $dql .= ' AND (rb.id IS NULL)';
             }
         }
+        if (is_bool($bookCriteria->inStock())) {
+            $dql .= ' AND b.inStock = :inStock';
+            $parameters['inStock'] = intval($bookCriteria->inStock());
+        }
 
         return $em->createQuery($dql)->setParameters($parameters);
     }

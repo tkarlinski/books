@@ -28,6 +28,10 @@
         {{ form_widget(filterForm.isRead) }}
     </div>
     <div class="form-group mx-sm-2 mb-1">
+        {{ form_errors(filterForm.inStock) }}
+        {{ form_widget(filterForm.inStock) }}
+    </div>
+    <div class="form-group mx-sm-3 mb-1 mt-1">
         {{ form_widget(filterForm.submit, {'attr': {'class': 'btn-primary'}}) }}
     </div>
     {{ form_end(filterForm, {'attr': {'class': 'form-group mx-sm-3 mb-2'}}) }}
@@ -43,7 +47,7 @@
             <th scope="col">{{ knp_pagination_sortable(pagination, 'Tytuł', 'b.title') }}</th>
             <th scope="col">Autor</th>
             <th scope="col">Przeczytana</th>
-            <th scope="col" class="w-25">Akcje</th>
+            <th scope="col" class="w-24">Akcje</th>
         </tr>
         </thead>
         <tbody>
@@ -58,7 +62,7 @@
                     {% set readBook = book.readBooks.first %}
                     {{ isRead(readBook) }}
                 </td>
-                <td class="w-25">
+                <td class="w-24">
                     <a class="btn btn-outline-primary btn-sm"
                        href="{{ path('app_book_show', {'id': book.id}) }}">szczegóły</a>
                     <a class="btn btn-outline-primary btn-sm"
