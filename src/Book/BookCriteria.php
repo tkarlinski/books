@@ -29,7 +29,7 @@ class BookCriteria
     private $isRead;
 
     /** @var null|bool */
-    private $inStock;
+    private $inStock = true;
 
     /** @var null|\DateTimeInterface */
     private $dateReadFrom;
