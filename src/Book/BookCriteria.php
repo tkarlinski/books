@@ -31,6 +31,12 @@ class BookCriteria
     /** @var null|bool */
     private $inStock;
 
+    /** @var null|\DateTimeInterface */
+    private $dateReadFrom;
+
+    /** @var null|\DateTimeInterface */
+    private $dateReadTo;
+
     public function getIsbn(): ?string
     {
         return $this->isbn;
@@ -89,5 +95,25 @@ class BookCriteria
     public function setInStock(?bool $inStock): void
     {
         $this->inStock = $inStock;
+    }
+
+    public function getDateReadFrom(): ?\DateTimeInterface
+    {
+        return $this->dateReadFrom;
+    }
+
+    public function setDateReadFrom(?\DateTimeInterface $dateReadFrom): void
+    {
+        $this->dateReadFrom = $dateReadFrom;
+    }
+
+    public function getDateReadTo(): ?\DateTimeInterface
+    {
+        return $this->dateReadTo;
+    }
+
+    public function setDateReadTo(?\DateTimeInterface $dateReadTo): void
+    {
+        $this->dateReadTo = $dateReadTo;
     }
 }

@@ -7,31 +7,39 @@
     {% include '_layout/list_header.html.twig' with {'header': 'Książki', 'path_add': 'app_book_new'} %}
 
     {{ form_start(filterForm, {'attr': {'class': 'form-inline'}}) }}
-    <div class="form-group mx-sm-2 mb-1">
+    <div class="form-group mx-sm-2 mb-2">
         {{ form_errors(filterForm.title) }}
         {{ form_widget(filterForm.title) }}
     </div>
-    <div class="form-group mx-sm-2 mb-1">
+    <div class="form-group mx-sm-2 mb-2">
         {{ form_errors(filterForm.author) }}
         {{ form_widget(filterForm.author) }}
     </div>
-    <div class="form-group mx-sm-2 mb-1">
+    <div class="form-group mx-sm-2 mb-2">
         {{ form_errors(filterForm.isbn) }}
         {{ form_widget(filterForm.isbn) }}
     </div>
-    <div class="form-group mx-sm-2 mb-1">
+    <div class="form-group mx-sm-2 mb-2">
         {{ form_errors(filterForm.publishingHouse) }}
         {{ form_widget(filterForm.publishingHouse) }}
     </div>
-    <div class="form-group mx-sm-2 mb-1">
+    <div class="form-group mx-sm-2 mb-2">
         {{ form_errors(filterForm.isRead) }}
         {{ form_widget(filterForm.isRead) }}
     </div>
-    <div class="form-group mx-sm-2 mb-1">
+    <div class="form-group mx-sm-2 mb-2">
         {{ form_errors(filterForm.inStock) }}
         {{ form_widget(filterForm.inStock) }}
     </div>
-    <div class="form-group mx-sm-3 mb-1 mt-1">
+    <div class="form-group date-range mx-sm-2 mb-2">
+        {{ form_label(filterForm.dateReadFrom)}}
+        {{ form_errors(filterForm.dateReadFrom) }}
+        {{ form_widget(filterForm.dateReadFrom) }}
+        {{ form_label(filterForm.dateReadTo)}}
+        {{ form_errors(filterForm.dateReadTo) }}
+        {{ form_widget(filterForm.dateReadTo) }}
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
         {{ form_widget(filterForm.submit, {'attr': {'class': 'btn-primary'}}) }}
     </div>
     {{ form_end(filterForm, {'attr': {'class': 'form-group mx-sm-3 mb-2'}}) }}

@@ -64,6 +64,14 @@ class BookRepository extends ServiceEntityRepository
             $dql .= ' AND b.inStock = :inStock';
             $parameters['inStock'] = intval($bookCriteria->inStock());
         }
+        if ($bookCriteria->getDateReadFrom() instanceof \DateTimeInterface) {
+            $dql .= ' AND rb.endDate >= :dateReadFrom';
+            $parameters['dateReadFrom'] = $bookCriteria->getDateReadFrom();
+        }
+        if ($bookCriteria->getDateReadTo() instanceof \DateTimeInterface) {
+            $dql .= ' AND rb.endDate <= :dateReadTo';
+            $parameters['dateReadTo'] = $bookCriteria->getDateReadTo();
+        }
 
         return $em->createQuery($dql)->setParameters($parameters);
     }

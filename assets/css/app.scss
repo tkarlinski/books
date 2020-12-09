@@ -198,3 +198,17 @@ hr {
   }
 }
 
+.form-inline {
+  .date-range {
+    input.from {
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+    }
+    input.to
+    {
+      margin-left: 0.5em;
+    }
+  }
+}
+
+
